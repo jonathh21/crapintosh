@@ -4,7 +4,8 @@ tagline: One of you is the hero. The other one holds the cape.
 image: "./images/im-batman.jpg"
 imageAlt: "Dark grey t-shirt printed with a cartoon Batman and the text \"I'M BATMAN (AND THEY BE ROBIN) (delete as appropriate)*\""
 design: "./images/im-batman-design.jpg"
-designAlt: "Print design: cartoon Batman pointing sideways under \"I'M BATMAN\", with \"(AND THEY BE ROBIN)\" and \"(delete as appropriate)*\" below"designPrompt: >-
+designAlt: "Print design: cartoon Batman pointing sideways under \"I'M BATMAN\", with \"(AND THEY BE ROBIN)\" and \"(delete as appropriate)*\" below"
+designPrompt: >-
   A vintage, distressed t-shirt graphic centered on a solid dark gray textured background. The main
   illustration features a cute, simple, hand-drawn cartoon character wearing a makeshift Batman
   costume - a cowl mask, cape tied at the neck, and a simple suit - gesturing with a thumb pointing to
