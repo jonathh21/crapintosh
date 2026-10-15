@@ -24,6 +24,7 @@ tagline: Click your heels three times and ping yourself.
 print: ["There's no place", 'like', '127.0.0.1'] # text for the generated mockup
 image: ./images/my-shirt.jpg # optional photo; replaces the generated mockup
 imageAlt: Description of the photo
+imageFocus: left # optional; which part of the photo to keep in the cropped catalogue thumbnail
 shirtColour: '#1f2a44'
 inkColour: '#7cf29a'
 tags: [networking, classic]
