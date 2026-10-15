@@ -1,0 +1,59 @@
+---
+interface Props {
+  print: string[];
+  shirtColour: string;
+  inkColour: string;
+  label: string;
+}
+
+const { print, shirtColour, inkColour, label } = Astro.props;
+
+// Fit each line into the printable chest area (about 150 units wide).
+const PRINT_WIDTH = 150;
+const lines = print.map((text) => ({
+  text,
+  size: Math.min(26, PRINT_WIDTH / (Math.max(text.length, 1) * 0.6)),
+}));
+const gap = 6;
+const blockHeight = lines.reduce((h, l) => h + l.size + gap, -gap);
+let y = 165 - blockHeight / 2;
+const positioned = lines.map((l) => {
+  y += l.size;
+  const out = { ...l, y };
+  y += gap;
+  return out;
+});
+---
+
+<svg viewBox="0 0 300 310" role="img" aria-label={label} class="mockup">
+  <path
+    d="M105 18 L58 32 L8 78 L42 122 L72 100 L72 296 L228 296 L228 100 L258 122 L292 78 L242 32 L195 18 Q150 58 105 18 Z"
+    fill={shirtColour}
+    stroke="#1a1a1a"
+    stroke-width="3"
+    stroke-linejoin="round"></path>
+  <path d="M112 21 Q150 48 188 21" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.5"></path>
+  {
+    positioned.map((l) => (
+      <text
+        x="150"
+        y={l.y}
+        text-anchor="middle"
+        font-family="ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace"
+        font-weight="700"
+        font-size={l.size.toFixed(1)}
+        fill={inkColour}
+      >
+        {l.text}
+      </text>
+    ))
+  }
+</svg>
+
+<style>
+  .mockup {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

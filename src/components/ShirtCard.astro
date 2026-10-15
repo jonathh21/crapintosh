@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ShirtMockup from './ShirtMockup.astro';
+
+interface Props {
+  shirt: CollectionEntry<'shirts'>;
+}
+
+const { shirt } = Astro.props;
+const { title, tagline, print, shirtColour, inkColour, price } = shirt.data;
+---
+
+<a href={`/shirts/${shirt.id}/`} class="card window">
+  <div class="window-title"><span>{title}</span></div>
+  <div class="window-body">
+    <ShirtMockup print={print} shirtColour={shirtColour} inkColour={inkColour} label={`${title} t-shirt`} />
+    <p class="tagline">{tagline}</p>
+    <p class="price">&pound;{price.toFixed(2)} <span>(probably)</span></p>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.1s;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .tagline {
+    margin: 0.75rem 0 0.25rem;
+  }
+
+  .price {
+    margin: 0;
+    font: 700 1rem var(--mono);
+  }
+
+  .price span {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

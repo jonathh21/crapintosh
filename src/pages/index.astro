@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ShirtCard from '../components/ShirtCard.astro';
+
+const shirts = (await getCollection('shirts')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout>
+  <section class="hero window">
+    <div class="window-title"><span>Welcome.txt</span></div>
+    <div class="window-body">
+      <h1>T-shirts for people who remember the dial-up noise.</h1>
+      <p>
+        Funny, geeky, retro and occasionally so obscure that only you and one bloke on a forum will get
+        it. Nothing is printed until enough people want it, so if you like one, hit
+        <strong>I want one</strong> and we'll let you know when it goes to print.
+      </p>
+    </div>
+  </section>
+
+  <h2 id="shirts">The catalogue</h2>
+  <div class="grid">
+    {shirts.map((shirt) => <ShirtCard shirt={shirt} />)}
+  </div>
+</Layout>
+
+<style>
+  .hero {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero h1 {
+    margin-top: 0.25rem;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+  }
+
+  .hero p {
+    max-width: 65ch;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.75rem;
+  }
+</style>
