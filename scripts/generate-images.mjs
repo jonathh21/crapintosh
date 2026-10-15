@@ -122,7 +122,7 @@ for (const file of files) {
   }
 
   console.log(`- ${id}: design`);
-  const design = await generate([{ type: 'text', text: designPrompt(d) }]);
+  const design = await generate([{ type: 'text', text: d.designPrompt ?? designPrompt(d) }]);
   const designFile = `${id}-design.${ext(design.mime)}`;
   await writeFile(path.join(IMAGES_DIR, designFile), Buffer.from(design.data, 'base64'));
 

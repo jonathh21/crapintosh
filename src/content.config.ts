@@ -16,6 +16,8 @@ const shirts = defineCollection({
       // Flat artwork of just the print, shown under the shirt on its own page.
       design: image().optional(),
       designAlt: z.string().optional(),
+      // Optional full prompt for the image generator scripts, used instead of one built from `print`.
+      designPrompt: z.string().optional(),
       // Lines of text printed on the generated mockup.
       print: z.array(z.string()).default([]),
       shirtColour: z.string().default('#e8e2d0'),

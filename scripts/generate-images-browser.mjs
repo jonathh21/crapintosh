@@ -86,15 +86,29 @@ async function ask(prompt, label) {
 // Downloads the full-size image from the given model response via Gemini's own button.
 async function save(index, file) {
   const resp = page.locator('model-response').nth(index);
-  await resp.locator('img').last().hover();
-  const [dl] = await Promise.all([
-    page.waitForEvent('download', { timeout: 90_000 }),
-    resp.locator('button[aria-label="Download full size image"]').last().click(),
-  ]);
-  const tmp = path.join(os.tmpdir(), `crapintosh-dl-${file}`);
-  await dl.saveAs(tmp);
+  const img = resp.locator('img').last();
+  await img.hover();
+  let input;
+  try {
+    const [dl] = await Promise.all([
+      page.waitForEvent('download', { timeout: 90_000 }),
+      resp.locator('button[aria-label="Download full size image"]').last().click(),
+    ]);
+    input = path.join(os.tmpdir(), `crapintosh-dl-${file}`);
+    await dl.saveAs(input);
+  } catch {
+    // Download button sometimes does nothing; fall back to the displayed (1024px) image via canvas.
+    log('  download failed, copying displayed image instead');
+    const dataUrl = await img.evaluate((el) => {
+      const c = document.createElement('canvas');
+      c.width = el.naturalWidth; c.height = el.naturalHeight;
+      c.getContext('2d').drawImage(el, 0, 0);
+      return c.toDataURL('image/png');
+    });
+    input = Buffer.from(dataUrl.split(',')[1], 'base64');
+  }
   const name = `${file}.jpg`;
-  await sharp(tmp).resize(1400, 1400, { fit: 'inside' }).jpeg({ quality: 86, mozjpeg: true }).toFile(`${IMAGES}/${name}`);
+  await sharp(input).resize(1400, 1400, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 86, mozjpeg: true }).toFile(`${IMAGES}/${name}`);
   log(`  saved ${name}`);
   return name;
 }
@@ -114,7 +128,7 @@ for (const f of files) {
   await page.goto('https://gemini.google.com/app');
   await page.locator('div.ql-editor[contenteditable="true"]').first().waitFor();
 
-  await ask(designPrompt(d), `${id}-design`);
+  await ask(d.designPrompt ? `Create an image: ${d.designPrompt}` : designPrompt(d), `${id}-design`);
   const designFile = await save(0, `${id}-design`);
 
   log(`pausing 2 min`); await sleep(PAUSE_MS);

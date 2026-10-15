@@ -27,6 +27,7 @@ imageAlt: Description of the photo
 imageFocus: left # optional; which part of the photo to keep in the cropped catalogue thumbnail
 design: ./images/my-shirt-design.jpg # optional flat artwork, shown as "The print" on the shirt page
 designAlt: Description of the artwork
+designPrompt: Full description of the artwork # optional, used instead of the generated design prompt
 shirtColour: '#1f2a44'
 inkColour: '#7cf29a'
 tags: [networking, classic]
