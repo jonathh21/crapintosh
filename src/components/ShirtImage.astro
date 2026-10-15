@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { shirt, thumb = false, loading = 'lazy' } = Astro.props;
-const { title, image, imageAlt, print, shirtColour, inkColour } = shirt.data;
+const { title, image, imageAlt, imageFocus, print, shirtColour, inkColour } = shirt.data;
 const alt = imageAlt ?? `${title} t-shirt`;
 ---
 
@@ -24,6 +24,7 @@ const alt = imageAlt ?? `${title} t-shirt`;
         widths={thumb ? [400, 800] : [800, 1200, 2000]}
         sizes={thumb ? '(max-width: 600px) 90vw, 300px' : '(max-width: 760px) 95vw, 550px'}
         loading={loading}
+        style={thumb ? `object-position: ${imageFocus}` : undefined}
       />
     </div>
   ) : (
@@ -48,6 +49,6 @@ const alt = imageAlt ?? `${title} t-shirt`;
 
   .thumb img {
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 </style>

@@ -8,8 +8,8 @@ interface Props {
 
 const { print, shirtColour, inkColour, label } = Astro.props;
 
-// Fit each line into the printable chest area (about 150 units wide).
-const PRINT_WIDTH = 150;
+// Fit each line into the printable chest area (the body is ~156 units wide).
+const PRINT_WIDTH = 132;
 const lines = print.map((text) => ({
   text,
   size: Math.min(26, PRINT_WIDTH / (Math.max(text.length, 1) * 0.6)),

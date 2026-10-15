@@ -16,8 +16,9 @@ const shirts = (await getCollection('shirts')).sort((a, b) => a.data.order - b.d
         it. Nothing is printed until enough people want it, so if you like one,
         hit <strong>I want one</strong> and we'll let you know when it goes to print.
       </p>
-      <p>
-        Got a better joke than ours? <a href="/ideas/" class="button">I have an idea for a t-shirt</a>
+      <p class="cta">
+        <span>Got a better joke than ours?</span>
+        <a href="/ideas/" class="button">I have an idea for a t-shirt</a>
       </p>
     </div>
   </section>
@@ -40,6 +41,14 @@ const shirts = (await getCollection('shirts')).sort((a, b) => a.data.order - b.d
 
   .hero p {
     max-width: 65ch;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    margin-top: 1.5rem;
   }
 
   .grid {

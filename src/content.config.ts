@@ -11,6 +11,8 @@ const shirts = defineCollection({
       // Photo/mockup of the shirt. If omitted, a mockup is generated from `print`.
       image: image().optional(),
       imageAlt: z.string().optional(),
+      // CSS object-position for the cropped catalogue thumbnail, e.g. 'left' or '30% 50%'.
+      imageFocus: z.string().default('center'),
       // Lines of text printed on the generated mockup.
       print: z.array(z.string()).default([]),
       shirtColour: z.string().default('#e8e2d0'),
