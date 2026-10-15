@@ -22,6 +22,8 @@ const subject = `Interest: ${shirtTitle}`;
 >
   <input type="hidden" name="shirt" value={shirtId} />
   <input type="hidden" name="subject" value={subject} />
+  <!-- Formspree uses _subject for the notification email's subject line. -->
+  <input type="hidden" name="_subject" value={subject} />
   {INTEREST_ACCESS_KEY && <input type="hidden" name="access_key" value={INTEREST_ACCESS_KEY} />}
   <!-- Honeypot: bots fill this, humans don't see it. -->
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
