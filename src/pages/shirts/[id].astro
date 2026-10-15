@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import ShirtImage from '../../components/ShirtImage.astro';
 import InterestForm from '../../components/InterestForm.astro';
@@ -14,18 +15,36 @@ interface Props {
 }
 
 const { shirt } = Astro.props;
-const { title, tagline, price, sizes, tags } = shirt.data;
+const { title, tagline, price, sizes, tags, design, designAlt } = shirt.data;
 const { Content } = await render(shirt);
 ---
 
 <Layout title={title} description={tagline}>
   <p class="back"><a href="/#shirts">&lt; Back to the catalogue</a></p>
   <div class="layout">
-    <div class="window">
-      <div class="window-title"><span>{title}</span></div>
-      <div class="window-body">
-        <ShirtImage shirt={shirt} loading="eager" />
+    <div class="media">
+      <div class="window">
+        <div class="window-title"><span>{title}</span></div>
+        <div class="window-body">
+          <ShirtImage shirt={shirt} loading="eager" />
+        </div>
       </div>
+      {
+        design && (
+          <div class="window">
+            <div class="window-title"><span>The print</span></div>
+            <div class="window-body">
+              <Image
+                class="design"
+                src={design}
+                alt={designAlt ?? `${title} print artwork`}
+                widths={[600, 1000, 1600]}
+                sizes="(max-width: 760px) 95vw, 550px"
+              />
+            </div>
+          </div>
+        )
+      }
     </div>
 
     <div class="details">
@@ -62,6 +81,17 @@ const { Content } = await render(shirt);
     .layout {
       grid-template-columns: 1fr;
     }
+  }
+
+  .media {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .design {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   h1 {

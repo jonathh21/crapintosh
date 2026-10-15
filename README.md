@@ -25,6 +25,8 @@ print: ["There's no place", 'like', '127.0.0.1'] # text for the generated mockup
 image: ./images/my-shirt.jpg # optional photo; replaces the generated mockup
 imageAlt: Description of the photo
 imageFocus: left # optional; which part of the photo to keep in the cropped catalogue thumbnail
+design: ./images/my-shirt-design.jpg # optional flat artwork, shown as "The print" on the shirt page
+designAlt: Description of the artwork
 shirtColour: '#1f2a44'
 inkColour: '#7cf29a'
 tags: [networking, classic]
@@ -38,6 +40,14 @@ Longer description shown on the shirt page.
 
 Put photos in `src/content/shirts/images/`; Astro resizes and optimises them at build time. Shirts without an `image` get an SVG mockup generated from `print`.
 
+### Generating images with Gemini
+
+Both scripts take the `print` lines, shirt colour and tagline, create a flat design, then a product photo of a shirt wearing it. They save `<id>-design.jpg` and `<id>.jpg` and fill in `image`, `imageAlt`, `design` and `designAlt`. With no arguments they only do shirts that have no `image`; pass shirt ids to (re)generate specific ones.
+
+- `npm run images:browser -- my-shirt`: free. Drives gemini.google.com in your own signed-in Chrome; see the top of `scripts/generate-images-browser.mjs` for how to start Chrome. Waits 2 minutes between images.
+- `npm run images -- my-shirt`: uses the Gemini API. Needs `GEMINI_API_KEY` with billing enabled (the free tier has no image quota). Set `GEMINI_IMAGE_MODEL` to change model.
+
+Always check the text in the results; image models still misspell things now and then.
 ## Express interest
 
 Each shirt page has a form that posts to Formspree (`https://formspree.io/f/mvkzdkgv`, set in

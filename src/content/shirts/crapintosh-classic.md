@@ -1,6 +1,10 @@
 ---
 title: Crapintosh Classic
 tagline: The house shirt. It just about works.
+image: "./images/crapintosh-classic.jpg"
+imageAlt: "Crapintosh Classic t-shirt printed with \"CRAPINTOSH / it just about works\""
+design: "./images/crapintosh-classic-design.jpg"
+designAlt: "Crapintosh Classic print artwork: \"CRAPINTOSH / it just about works\""
 print: ['CRAPINTOSH', 'it just about works']
 shirtColour: '#e8e2d0'
 inkColour: '#1a1a1a'

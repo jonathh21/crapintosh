@@ -1,6 +1,10 @@
 ---
 title: IRQ Conflicts
 tagline: A conversation starter. And ender.
+image: "./images/irq-conflicts.jpg"
+imageAlt: "IRQ Conflicts t-shirt printed with \"Ask me about / my IRQ / conflicts\""
+design: "./images/irq-conflicts-design.jpg"
+designAlt: "IRQ Conflicts print artwork: \"Ask me about / my IRQ / conflicts\""
 print: ['Ask me about', 'my IRQ', 'conflicts']
 shirtColour: '#c4562f'
 inkColour: '#fff4e0'
