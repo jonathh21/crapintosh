@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import ShirtImage from './ShirtImage.astro';
 
 interface Props {
@@ -7,29 +8,132 @@ interface Props {
 }
 
 const { shirt } = Astro.props;
-const { title, tagline, price } = shirt.data;
+const { title, tagline, price, design, designAlt } = shirt.data;
+const href = `/shirts/${shirt.id}/`;
+const count = design ? 2 : 1;
 ---
 
-<a href={`/shirts/${shirt.id}/`} class="card window">
+<div class="card window">
   <div class="window-title"><span>{title}</span></div>
   <div class="window-body">
-    <ShirtImage shirt={shirt} thumb />
-    <p class="tagline">{tagline}</p>
-    <p class="price">&pound;{price.toFixed(2)} <span>(probably)</span></p>
+    <div class="carousel" data-carousel>
+      <div class="track">
+        <a class="slide" href={href} aria-label={`${title}: the shirt`}>
+          <ShirtImage shirt={shirt} thumb />
+        </a>
+        {
+          design && (
+            <a class="slide" href={href} aria-label={`${title}: the print`} tabindex="-1">
+              <Image
+                class="design"
+                src={design}
+                alt={designAlt ?? `${title} print artwork`}
+                widths={[400, 800]}
+                sizes="(max-width: 600px) 90vw, 300px"
+              />
+            </a>
+          )
+        }
+      </div>
+      {
+        count > 1 && (
+          <div class="dots">
+            {Array.from({ length: count }, (_, i) => (
+              <button
+                type="button"
+                aria-label={`Show image ${i + 1} of ${count}`}
+                aria-current={i === 0 ? 'true' : undefined}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+    <a class="info" href={href}>
+      <p class="tagline">{tagline}</p>
+      <p class="price">&pound;{price.toFixed(2)} <span>(probably)</span></p>
+    </a>
   </div>
-</a>
+</div>
+
+<script>
+  for (const carousel of document.querySelectorAll<HTMLElement>('[data-carousel]')) {
+    const track = carousel.querySelector<HTMLElement>('.track')!;
+    const dots = [...carousel.querySelectorAll<HTMLButtonElement>('.dots button')];
+    if (!dots.length) continue;
+
+    const update = () => {
+      const current = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((d, i) => d.toggleAttribute('aria-current', i === current));
+    };
+    track.addEventListener('scroll', update, { passive: true });
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' })),
+    );
+  }
+</script>
 
 <style>
   .card {
-    display: block;
-    text-decoration: none;
     transition: transform 0.1s;
   }
 
   .card:hover,
-  .card:focus-visible {
+  .card:focus-within {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: block;
+  }
+
+  .design {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 300 / 310;
+    object-fit: cover;
+  }
+
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+  }
+
+  .dots button {
+    width: 0.7rem;
+    height: 0.7rem;
+    padding: 0;
+    border: 2px solid var(--ink);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .dots button[aria-current] {
+    background: var(--ink);
+  }
+
+  .info {
+    display: block;
+    color: inherit;
+    text-decoration: none;
   }
 
   .tagline {
