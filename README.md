@@ -61,8 +61,24 @@ you can tell them apart from interest sign-ups. To send ideas to their own Forms
 Both forms use `src/scripts/formspree.ts`, which submits any `<form data-formspree>` in place and shows
 the `data-success` message.
 
-## Deploying to Fastmail
+## Deploying (GitHub Pages)
 
-1. `npm run build`
-2. In Fastmail, go to Files and upload the contents of `dist/` to a folder.
-3. In Settings > Domains, point `crapintosh.co.uk` at Fastmail and set that folder as the website.
+Every push to `main` builds and deploys the site via `.github/workflows/deploy.yml`.
+
+One-off setup:
+
+1. In the repo on GitHub, go to **Settings > Pages** and set **Source** to **GitHub Actions**.
+2. At your DNS provider for `crapintosh.co.uk` (remove any existing A/AAAA/CNAME records for these
+   names first, e.g. Fastmail's default website records):
+
+   | Type  | Name  | Value                                                                         |
+   | ----- | ----- | ----------------------------------------------------------------------------- |
+   | A     | `@`   | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`    |
+   | AAAA  | `@`   | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
+   | CNAME | `www` | `jonathh21.github.io`                                                         |
+
+   Leave MX and other email records alone.
+3. In **Settings > Pages**, set the custom domain to `crapintosh.co.uk`, wait for the DNS check to
+   pass, then tick **Enforce HTTPS**. (`public/CNAME` keeps the domain set on every deploy.)
+4. Optional but recommended: verify the domain under your GitHub account's **Settings > Pages** to
+   stop anyone else claiming it.
