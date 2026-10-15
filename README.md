@@ -50,6 +50,16 @@ Each shirt page has a form that posts to Formspree (`https://formspree.io/f/mvkz
 `_gotcha` is a hidden honeypot that Formspree uses to drop spam bots. With JavaScript the form submits
 in place; without it, it falls back to a normal POST and Formspree's own thank-you page. To test
 against a different form, set `PUBLIC_INTEREST_ENDPOINT` in `.env` (see `.env.example`).
+## T-shirt ideas
+
+`/ideas/` ("Got an idea?" in the menu) lets visitors pitch designs. It posts `idea`, optional `name`
+and optional `email` to the same Formspree form, with the subject "T-shirt idea" and `type=idea`, so
+you can tell them apart from interest sign-ups. To send ideas to their own Formspree form, set
+`PUBLIC_IDEAS_ENDPOINT` in `.env`.
+
+Both forms use `src/scripts/formspree.ts`, which submits any `<form data-formspree>` in place and shows
+the `data-success` message.
+
 ## Deploying to Fastmail
 
 1. `npm run build`

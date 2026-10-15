@@ -126,6 +126,65 @@ h3 {
   cursor: wait;
 }
 
+/* Forms */
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form .button {
+  justify-self: start;
+}
+
+.field {
+  display: grid;
+  gap: 0.25rem;
+  font: 700 0.9rem var(--mono);
+}
+
+.field input,
+.field textarea {
+  font: 1rem var(--sans);
+  padding: 0.5rem;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.field .hint {
+  font: 400 0.8rem var(--sans);
+  color: var(--muted);
+}
+
+.status {
+  font-family: var(--mono);
+  margin: 0;
+}
+
+.status:empty {
+  display: none;
+}
+
+.status.error {
+  color: var(--accent);
+}
+
+.small {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Honeypot field: hidden from humans, filled by bots. */
+.hp {
+  position: absolute;
+  left: -9999px;
+}
+
 .tag {
   display: inline-block;
   font: 0.75rem var(--mono);

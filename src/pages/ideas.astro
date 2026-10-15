@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { IDEAS_ENDPOINT } from '../config';
+---
+
+<Layout title="Got an idea?" description="Pitch us a funny, geeky, retro or obscure t-shirt idea.">
+  <div class="window">
+    <div class="window-title"><span>New Idea.txt</span></div>
+    <div class="window-body">
+      <h1>I have an idea for a t-shirt</h1>
+      <p>
+        Hammer it in. A slogan, an in-joke, a half-remembered error message from 1994, a sketch description.
+        If it makes us laugh and enough people want it, we'll make it.
+      </p>
+
+      <form
+        class="form"
+        method="POST"
+        action={IDEAS_ENDPOINT}
+        data-formspree
+        data-success="Got it, thanks! Feel free to send another."
+      >
+        <input type="hidden" name="_subject" value="T-shirt idea" />
+        <input type="hidden" name="type" value="idea" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+
+        <label class="field">
+          The idea
+          <textarea
+            name="idea"
+            required
+            maxlength="2000"
+            placeholder="e.g. A floppy disk saying 'I was the save icon before it was cool'"></textarea>
+        </label>
+
+        <label class="field">
+          Name <span class="hint">Optional. Who to credit if it goes to print.</span>
+          <input type="text" name="name" autocomplete="name" />
+        </label>
+
+        <label class="field">
+          Email <span class="hint">Optional. Only if you want to hear back.</span>
+          <input type="email" name="email" autocomplete="email" placeholder="you@example.com" />
+        </label>
+
+        <button type="submit" class="button">Send idea</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import '../scripts/formspree';
+</script>
+
+<style>
+  .window {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin-top: 0.25rem;
+  }
+</style>
