@@ -1,5 +1,5 @@
 ---
-import { INTEREST_ACCESS_KEY, INTEREST_EMAIL, INTEREST_ENDPOINT } from '../config';
+import { INTEREST_ENDPOINT } from '../config';
 
 interface Props {
   shirtId: string;
@@ -8,24 +8,13 @@ interface Props {
 }
 
 const { shirtId, shirtTitle, sizes } = Astro.props;
-const subject = `Interest: ${shirtTitle}`;
 ---
 
-<form
-  class="interest"
-  method="post"
-  action={INTEREST_ENDPOINT || `mailto:${INTEREST_EMAIL}?subject=${encodeURIComponent(subject)}`}
-  enctype={INTEREST_ENDPOINT ? undefined : 'text/plain'}
-  data-endpoint={INTEREST_ENDPOINT}
-  data-email={INTEREST_EMAIL}
-  data-subject={subject}
->
+<!-- Without JS this is a plain POST to Formspree; with JS it submits via fetch and stays on the page. -->
+<form class="interest" method="POST" action={INTEREST_ENDPOINT}>
   <input type="hidden" name="shirt" value={shirtId} />
-  <input type="hidden" name="subject" value={subject} />
-  <!-- Formspree uses _subject for the notification email's subject line. -->
-  <input type="hidden" name="_subject" value={subject} />
-  {INTEREST_ACCESS_KEY && <input type="hidden" name="access_key" value={INTEREST_ACCESS_KEY} />}
-  <!-- Honeypot: bots fill this, humans don't see it. -->
+  <!-- Formspree special fields: _subject sets the notification subject, _gotcha is a honeypot. -->
+  <input type="hidden" name="_subject" value={`Interest: ${shirtTitle}`} />
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
 
   <fieldset>
@@ -59,31 +48,26 @@ const subject = `Interest: ${shirtTitle}`;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const data = new FormData(form);
-      if (data.get('_gotcha')) return;
-
-      const { endpoint, email, subject } = form.dataset;
-
-      if (!endpoint) {
-        const body = `Shirt: ${data.get('shirt')}\nSize: ${data.get('size')}\nEmail: ${data.get('email')}`;
-        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject ?? '')}&body=${encodeURIComponent(body)}`;
-        status.textContent = 'Your email app should open with everything filled in. Just hit send.';
-        return;
-      }
-
       button.disabled = true;
+      status.classList.remove('error');
       status.textContent = 'Sending...';
       try {
-        const res = await fetch(endpoint, {
+        const res = await fetch(form.action, {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: data,
+          body: new FormData(form),
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+          // Formspree returns { errors: [{ message, field? }] } on failure.
+          const body = await res.json().catch(() => null);
+          const messages = body?.errors?.map((e: { message: string }) => e.message).join(' ');
+          throw new Error(messages || `HTTP ${res.status}`);
+        }
         form.reset();
         status.textContent = "Noted! We'll let you know if it goes to print.";
-      } catch {
-        status.textContent = 'Error: something went wrong. Please try again in a moment.';
+      } catch (err) {
+        status.classList.add('error');
+        status.textContent = `Error: ${err instanceof Error ? err.message : 'something went wrong'}. Please try again.`;
       } finally {
         button.disabled = false;
       }
@@ -163,6 +147,10 @@ const subject = `Interest: ${shirtTitle}`;
   .status {
     font-family: var(--mono);
     margin: 0;
+  }
+
+  .status.error {
+    color: var(--accent);
   }
 
   .small {

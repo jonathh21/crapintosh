@@ -21,7 +21,9 @@ Add a Markdown file to `src/content/shirts/`. The file name becomes the URL
 ---
 title: No Place Like Home
 tagline: Click your heels three times and ping yourself.
-print: ["There's no place", 'like', '127.0.0.1'] # lines printed on the mockup
+print: ["There's no place", 'like', '127.0.0.1'] # text for the generated mockup
+image: ./images/my-shirt.jpg # optional photo; replaces the generated mockup
+imageAlt: Description of the photo
 shirtColour: '#1f2a44'
 inkColour: '#7cf29a'
 tags: [networking, classic]
@@ -33,22 +35,21 @@ order: 2 # position in the catalogue
 Longer description shown on the shirt page.
 ```
 
-Mockups are generated as SVG from `print`, so no image is needed to get started.
+Put photos in `src/content/shirts/images/`; Astro resizes and optimises them at build time. Shirts without an `image` get an SVG mockup generated from `print`.
 
 ## Express interest
 
-Fastmail website hosting is static only, so the form can't save submissions itself. Copy
-`.env.example` to `.env` and set:
+Each shirt page has a form that posts to Formspree (`https://formspree.io/f/mvkzdkgv`, set in
+`src/config.ts`). Formspree emails each submission, with these fields:
 
-- `PUBLIC_INTEREST_ENDPOINT`: a form service URL that emails you each submission, for example
-  [Formspree](https://formspree.io) (`https://formspree.io/f/xxxx`) or
-  [Web3Forms](https://web3forms.com) (`https://api.web3forms.com/submit`). Point it at your Fastmail
-  address.
-- `PUBLIC_INTEREST_ACCESS_KEY`: only for services that need it (Web3Forms).
-- `PUBLIC_INTEREST_EMAIL`: used when no endpoint is set; the form then opens a prefilled email instead.
+- `shirt`: the shirt id (its file name)
+- `size`
+- `email`: Formspree uses this as the reply-to address
+- `_subject`: "Interest: <shirt title>", used as the email subject
 
-Each submission includes `shirt` (the shirt id), `size`, `email` and `subject`.
-
+`_gotcha` is a hidden honeypot that Formspree uses to drop spam bots. With JavaScript the form submits
+in place; without it, it falls back to a normal POST and Formspree's own thank-you page. To test
+against a different form, set `PUBLIC_INTEREST_ENDPOINT` in `.env` (see `.env.example`).
 ## Deploying to Fastmail
 
 1. `npm run build`

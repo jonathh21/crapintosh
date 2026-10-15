@@ -6,7 +6,7 @@ shirtColour: '#c4562f'
 inkColour: '#fff4e0'
 tags: [obscure, hardware, dos]
 price: 20
-order: 4
+order: 6
 ---
 
 Sound card on IRQ 5, network card also on IRQ 5, and an entire weekend gone. Perfect for parties where

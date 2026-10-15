@@ -1,7 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import ShirtMockup from '../../components/ShirtMockup.astro';
+import ShirtImage from '../../components/ShirtImage.astro';
 import InterestForm from '../../components/InterestForm.astro';
 
 export async function getStaticPaths() {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { shirt } = Astro.props;
-const { title, tagline, print, shirtColour, inkColour, price, sizes, tags } = shirt.data;
+const { title, tagline, price, sizes, tags } = shirt.data;
 const { Content } = await render(shirt);
 ---
 
@@ -24,7 +24,7 @@ const { Content } = await render(shirt);
     <div class="window">
       <div class="window-title"><span>{title}</span></div>
       <div class="window-body">
-        <ShirtMockup print={print} shirtColour={shirtColour} inkColour={inkColour} label={`${title} t-shirt`} />
+        <ShirtImage shirt={shirt} loading="eager" />
       </div>
     </div>
 

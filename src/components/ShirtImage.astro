@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import ShirtMockup from './ShirtMockup.astro';
+
+interface Props {
+  shirt: CollectionEntry<'shirts'>;
+  // Square, letterboxed thumbnail for the catalogue grid.
+  thumb?: boolean;
+  loading?: 'eager' | 'lazy';
+}
+
+const { shirt, thumb = false, loading = 'lazy' } = Astro.props;
+const { title, image, imageAlt, print, shirtColour, inkColour } = shirt.data;
+const alt = imageAlt ?? `${title} t-shirt`;
+---
+
+{
+  image ? (
+    <div class:list={['photo', { thumb }]}>
+      <Image
+        src={image}
+        alt={alt}
+        widths={thumb ? [400, 800] : [800, 1200, 2000]}
+        sizes={thumb ? '(max-width: 600px) 90vw, 300px' : '(max-width: 760px) 95vw, 550px'}
+        loading={loading}
+      />
+    </div>
+  ) : (
+    <ShirtMockup print={print} shirtColour={shirtColour} inkColour={inkColour} label={alt} />
+  )
+}
+
+<style>
+  .photo {
+    background: #151515;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .thumb {
+    aspect-ratio: 300 / 310;
+  }
+
+  .thumb img {
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

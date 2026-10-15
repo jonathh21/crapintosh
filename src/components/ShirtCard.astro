@@ -1,19 +1,19 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import ShirtMockup from './ShirtMockup.astro';
+import ShirtImage from './ShirtImage.astro';
 
 interface Props {
   shirt: CollectionEntry<'shirts'>;
 }
 
 const { shirt } = Astro.props;
-const { title, tagline, print, shirtColour, inkColour, price } = shirt.data;
+const { title, tagline, price } = shirt.data;
 ---
 
 <a href={`/shirts/${shirt.id}/`} class="card window">
   <div class="window-title"><span>{title}</span></div>
   <div class="window-body">
-    <ShirtMockup print={print} shirtColour={shirtColour} inkColour={inkColour} label={`${title} t-shirt`} />
+    <ShirtImage shirt={shirt} thumb />
     <p class="tagline">{tagline}</p>
     <p class="price">&pound;{price.toFixed(2)} <span>(probably)</span></p>
   </div>

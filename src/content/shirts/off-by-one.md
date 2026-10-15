@@ -6,7 +6,7 @@ shirtColour: '#f2efe6'
 inkColour: '#1a1a1a'
 tags: [programming, classic]
 price: 20
-order: 5
+order: 7
 ---
 
 A shirt with a bug in it. Intentionally. Probably.
