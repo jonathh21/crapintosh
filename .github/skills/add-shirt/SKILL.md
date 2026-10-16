@@ -1,6 +1,6 @@
 ---
 name: add-shirt
-description: Add a new t-shirt to the Crapintosh site, including Gemini-generated print design and product photo, then build, commit and push. Use when the user describes a new shirt idea or design, or asks to add, generate or explore shirt designs.
+description: Add a new t-shirt to the Crapintosh site, including Gemini-generated print design and product photo, then build, commit and push. Use when the user describes a new shirt idea or design, or asks to add, generate or explore shirt designs. Asks how many designs to make for an idea.
 ---
 
 # Adding a t-shirt to Crapintosh
@@ -38,7 +38,9 @@ Rules:
 - In written copy avoid em/en dashes, curly quotes, arrows, ellipsis glyphs and emoji.
 - If the idea uses film, brand or character IP (Batman, Back to the Future, Guinness, Copilot...), add it but
   briefly flag the trademark/copyright risk to the user.
-- When the user asks to "explore" an idea, write 3 or 4 distinct takes as separate shirts and push them all.
+- When the user gives a short idea rather than a finished design description, first ask (with the
+  ask_user tool) how many designs to create for it, defaulting to 3. Then write that many distinct
+  takes as separate shirts and push them all. If they give a full design description, make just that one.
 
 ## 2. Push straight away
 
