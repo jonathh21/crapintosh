@@ -1,6 +1,10 @@
 ---
 title: Hallucinating Agents
 tagline: The agents in the Matrix were hallucinating. There was never a spoon.
+image: "./images/hallucinating-agents.jpg"
+imageAlt: "Hallucinating Agents t-shirt printed with \"THE AGENTS IN THE MATRIX / WERE HALLUCINATING / (THERE WAS NEVER A SPOON)\""
+design: "./images/hallucinating-agents-design.jpg"
+designAlt: "Hallucinating Agents print artwork: \"THE AGENTS IN THE MATRIX / WERE HALLUCINATING / (THERE WAS NEVER A SPOON)\""
 designPrompt: >-
   A distressed, vintage screen-printed t-shirt graphic, flat and print-ready, centred on a plain solid
   black background. Falling columns of glowing green digital rain characters fill the background. In
