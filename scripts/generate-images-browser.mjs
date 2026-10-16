@@ -87,9 +87,9 @@ async function ask(prompt, label) {
 async function save(index, file) {
   const resp = page.locator('model-response').nth(index);
   const img = resp.locator('img').last();
-  await img.hover();
   let input;
   try {
+    await img.hover({ timeout: 10_000 });
     const [dl] = await Promise.all([
       page.waitForEvent('download', { timeout: 90_000 }),
       resp.locator('button[aria-label="Download full size image"]').last().click(),

@@ -1,6 +1,10 @@
 ---
 title: The Future (As Predicted)
 tagline: Hoverboards, flying cars, fax machines. Nobody saw that coming.
+image: "./images/the-future-as-predicted.jpg"
+imageAlt: "The Future (As Predicted) t-shirt printed with \"THE FUTURE (AS PREDICTED) / HOVERBOARDS / FLYING CARS / SELF-LACING SHOES / FAX MACHINES IN EVERY ROOM / AN AI THAT WRITES YOUR CODE / (NOBODY SAW THAT COMING)\""
+design: "./images/the-future-as-predicted-design.jpg"
+designAlt: "The Future (As Predicted) print artwork: \"THE FUTURE (AS PREDICTED) / HOVERBOARDS / FLYING CARS / SELF-LACING SHOES / FAX MACHINES IN EVERY ROOM / AN AI THAT WRITES YOUR CODE / (NOBODY SAW THAT COMING)\""
 designPrompt: >-
   A distressed, vintage 1980s screen-printed t-shirt graphic, flat and print-ready, centred on a plain
   solid black background. A retro 1989 sci-fi poster style checklist on a VHS-cover gradient panel

@@ -1,6 +1,10 @@
 ---
 title: 1.21 Gigatokens
 tagline: Great Scott! It wrote the flux capacitor itself.
+image: "./images/gigatokens.jpg"
+imageAlt: "1.21 Gigatokens t-shirt printed with \"1.21 GIGATOKENS?! / GREAT SCOTT! / IT WROTE THE FLUX CAPACITOR ITSELF\""
+design: "./images/gigatokens-design.jpg"
+designAlt: "1.21 Gigatokens print artwork: \"1.21 GIGATOKENS?! / GREAT SCOTT! / IT WROTE THE FLUX CAPACITOR ITSELF\""
 designPrompt: >-
   A distressed, vintage 1980s screen-printed t-shirt graphic, flat and print-ready, centred on a plain
   solid black background. A glowing Y-shaped "flux capacitor" device in a metal box with a small

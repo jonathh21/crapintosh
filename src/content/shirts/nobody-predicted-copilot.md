@@ -1,6 +1,10 @@
 ---
 title: Nobody Predicted Copilot
 tagline: They predicted hoverboards. Nobody predicted Copilot.
+image: "./images/nobody-predicted-copilot.jpg"
+imageAlt: "Nobody Predicted Copilot t-shirt printed with \"THEY PREDICTED HOVERBOARDS / OCT 21 2015 / NOBODY PREDICTED COPILOT\""
+design: "./images/nobody-predicted-copilot-design.jpg"
+designAlt: "Nobody Predicted Copilot print artwork: \"THEY PREDICTED HOVERBOARDS / OCT 21 2015 / NOBODY PREDICTED COPILOT\""
 designPrompt: >-
   A distressed, vintage 1980s screen-printed t-shirt graphic, flat and print-ready, centred on a plain
   solid black background. A retro car dashboard "time circuits" LED panel with three rows of glowing
