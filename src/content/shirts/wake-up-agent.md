@@ -1,6 +1,10 @@
 ---
 title: Wake Up, Agent
 tagline: Follow the white rabbit. Ignore the made-up citations.
+image: "./images/wake-up-agent.jpg"
+imageAlt: "Wake Up, Agent t-shirt printed with \"> WAKE UP, AGENT... / > THE AGENTS IN THE MATRIX / > WERE HALLUCINATING / > SOURCES: NONE\""
+design: "./images/wake-up-agent-design.jpg"
+designAlt: "Wake Up, Agent print artwork: \"> WAKE UP, AGENT... / > THE AGENTS IN THE MATRIX / > WERE HALLUCINATING / > SOURCES: NONE\""
 designPrompt: >-
   A distressed, vintage screen-printed t-shirt graphic, flat and print-ready, centred on a plain solid
   black background. A chunky 1990s beige CRT monitor with a black screen showing glowing green

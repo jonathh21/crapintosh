@@ -1,6 +1,10 @@
 ---
 title: That Wasn't Deja Vu
 tagline: The cat walked past twice because the agent made the second one up.
+image: "./images/that-wasnt-deja-vu.jpg"
+imageAlt: "That Wasn't Deja Vu t-shirt printed with \"THE AGENTS IN THE MATRIX WERE HALLUCINATING / (THAT WASN'T DEJA VU)\""
+design: "./images/that-wasnt-deja-vu-design.jpg"
+designAlt: "That Wasn't Deja Vu print artwork: \"THE AGENTS IN THE MATRIX WERE HALLUCINATING / (THAT WASN'T DEJA VU)\""
 designPrompt: >-
   A distressed, vintage screen-printed t-shirt graphic, flat and print-ready, centred on a plain solid
   black background with faint falling green digital rain. In the centre, a simple bold illustration
