@@ -1,6 +1,10 @@
 ---
 title: Far Out, Mr Anderson
 tagline: The agents in the Matrix were hallucinating. Properly.
+image: "./images/far-out-mr-anderson.jpg"
+imageAlt: "Far Out, Mr Anderson t-shirt printed with \"THE AGENTS IN THE MATRIX / WERE HALLUCINATING / (FAR OUT, MR ANDERSON)\""
+design: "./images/far-out-mr-anderson-design.jpg"
+designAlt: "Far Out, Mr Anderson print artwork: \"THE AGENTS IN THE MATRIX / WERE HALLUCINATING / (FAR OUT, MR ANDERSON)\""
 designPrompt: >-
   A distressed, vintage 1970s psychedelic screen-printed t-shirt graphic, flat and print-ready,
   centred on a plain solid black background. Three faceless silhouetted men in black suits, black ties
