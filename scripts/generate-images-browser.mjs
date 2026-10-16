@@ -108,7 +108,7 @@ async function save(index, file) {
     input = Buffer.from(dataUrl.split(',')[1], 'base64');
   }
   const name = `${file}.jpg`;
-  await sharp(input).resize(1400, 1400, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 86, mozjpeg: true }).toFile(`${IMAGES}/${name}`);
+  await sharp(input).resize(2048, 2048, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 88, mozjpeg: true }).toFile(`${IMAGES}/${name}`);
   log(`  saved ${name}`);
   return name;
 }

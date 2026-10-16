@@ -74,7 +74,7 @@ npm run images:browser -- <id> [<id> ...]
 
 - It opens a new chat per shirt, makes the flat design, waits 2 minutes, then makes the product photo.
 - Keep the 2-minute pauses; the user asked for them.
-- Output: `src/content/shirts/images/<id>-design.jpg` and `<id>.jpg` (max 1400px), plus frontmatter.
+- Output: `src/content/shirts/images/<id>-design.jpg` and `<id>.jpg` (max 2048px; 1024px if the download falls back to the on-screen copy), plus frontmatter.
 - If the download button fails it falls back to copying the on-screen image, which is fine.
 - `npm run images` is the API alternative, but needs a billed `GEMINI_API_KEY`.
 
